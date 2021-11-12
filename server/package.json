@@ -1,0 +1,13 @@
+{
+  "name": "GetSetHelp-server",
+  "version": "1.0.0",
+  "description": "Server",
+  "main": "index.js",
+  "repository": "https://github.com/GetSetHelp/GetSetHelp",
+  "author": "Someone",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}

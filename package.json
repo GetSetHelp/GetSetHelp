@@ -1,0 +1,10 @@
+{
+  "name": "GetSetHelp",
+  "version": "1.0.0",
+  "description": "GetSetHelp Initiative",
+  "main": "index.js",
+  "repository": "https://github.com/GetSetHelp/GetSetHelp.git",
+  "author": "Team",
+  "license": "MIT",
+  "private": true
+}
