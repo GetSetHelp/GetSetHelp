@@ -25,7 +25,11 @@ function Login() {
     const firstName = response.profileObj.givenName;
     const lastName = response.profileObj.familyName;
     const email = response.profileObj.email;
+<<<<<<< HEAD
     localStorage.setItem("userLoggedInToken", response.tokenId);
+=======
+
+>>>>>>> 0d2bef8 ( add google login, login route and updated server)
     const user = {
       firstName,
       lastName,
