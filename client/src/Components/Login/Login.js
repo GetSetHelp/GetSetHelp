@@ -22,22 +22,10 @@ function Login() {
     });
   };
   const responseGoogle = (response) => {
-    const firstName = response.profileObj.givenName;
-    const lastName = response.profileObj.familyName;
-    const email = response.profileObj.email;
-<<<<<<< HEAD
     localStorage.setItem("userLoggedInToken", response.tokenId);
-=======
-
->>>>>>> 0d2bef8 ( add google login, login route and updated server)
-    const user = {
-      firstName,
-      lastName,
-      email,
-    };
 
     axios
-      .post(`${process.env.REACT_APP_SERVER}/routes/user/login`, user)
+      .post(`${process.env.REACT_APP_SERVER}/routes/user/login`)
       .then((res) => {
         console.log(res);
       })
