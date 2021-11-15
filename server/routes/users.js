@@ -5,7 +5,6 @@ const UserCredential = require("../models/UserCredential.model.js");
 
 router.post("/login", async (req, res) => {
   try {
-    console.log(req.body);
     const checkUser = await UserCredential.findOne({
       // check if user already exist
       email: req.body.email,
