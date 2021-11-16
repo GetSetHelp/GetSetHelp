@@ -1,9 +1,28 @@
-var express = require('express');
+var express = require("express");
 var router = express.Router();
+const mongoose = require("mongoose");
+const UserCredential = require("../models/UserCredential.model.js");
 
-/* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
+router.post("/login", async (req, res) => {
+  try {
+    const checkUser = await UserCredential.findOne({
+      // check if user already exist
+      email: req.body.email,
+    });
+    if (checkUser) {
+      res.send("User already exist!");
+    } else {
+      const newUser = new UserCredential();
+      newUser.firstname = req.body.firstName;
+      newUser.lastname = req.body.lastName;
+      newUser.email = req.body.email;
+      let newUserModel = new UserCredential(newUser);
+      await newUserModel.save();
+      res.json("New User Successfully Added!");
+    }
+  } catch {
+    res.status(500).send("Oops! Something went wrong.");
+  }
 });
 
 module.exports = router;
