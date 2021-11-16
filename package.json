@@ -6,7 +6,8 @@
   "author": "Yash Pandey",
   "license": "MIT",
   "dependencies": {
-    "concurrently": "^6.2.1"
+    "concurrently": "^6.2.1",
+    "react-router-dom": "^6.0.2"
   },
   "scripts": {
     "dev": "concurrently --kill-others \"yarn client\" \"yarn server\"",
