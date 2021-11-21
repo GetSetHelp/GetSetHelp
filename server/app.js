@@ -6,11 +6,12 @@ const path = require("path");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 const mongoose = require("mongoose");
+const verifyUser = require("./middlewares/verifyUser");
 const app = express();
 cors = require("cors");
 
 // MongoDB Connection
-mongoose.connect(process.env.MONGO_URL, async (err) => {
+mongoose.connect(process.env.MONGODB_URL, async (err) => {
   if (err) throw err;
   console.log("Conncted to MongoDB!");
 });
@@ -28,8 +29,8 @@ app.use(
 );
 app.use(express.static(path.join(__dirname, "..", "build")));
 app.use(express.static("public"));
-app.use("/routes/user", require("./routes/users"));
+app.use("/user", require("./routes/users"));
 
 const port = 4000;
 
-app.listen(port, () => console.log("Server started on Port: 4000"));
+app.listen(port, () => console.log("Server started on Port: 4001"));

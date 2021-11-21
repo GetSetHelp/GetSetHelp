@@ -1,5 +1,5 @@
 import "./Login.css";
-import { useState } from "react";
+import React, { useState } from "react";
 import GoogleLogin from "react-google-login";
 import GoogleIcon from "./GoogleIcon.svg";
 import { Link } from "react-router-dom";
@@ -22,17 +22,21 @@ function Login() {
     });
   };
   const responseGoogle = (response) => {
-    localStorage.setItem("userLoggedInToken", response.tokenId);
-
+    localStorage.setItem("userToken", response.tokenId);
     axios
-      .post(`${process.env.REACT_APP_SERVER}/routes/user/login`)
+      .post(`${process.env.REACT_APP_SERVER}/user/login`, {id_token: localStorage.getItem("userToken")})
       .then((res) => {
-        console.log(res);
+        alert(res.data);
+        if (res.data === "LoggedIn!") {
+          // redirect to "/"
+        }
+        else {
+          // redirect to "/signup"
+        }
       })
       .catch((err) => {
-        console.log(err);
+        alert("Error in login! Try again");
       });
-    console.log(response);
   };
 
   return (

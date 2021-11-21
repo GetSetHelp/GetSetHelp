@@ -1,9 +1,11 @@
 var express = require("express");
 var router = express.Router();
 const mongoose = require("mongoose");
-const User = require("../models/user.model.js");
+const verifyUser = require("../middlewares/verifyUser.js");
+const UserCredential = require("../models/UserCredential.model.js");
 
-router.post("/login", async (req, res) => {
+router.post("/login", verifyUser, async (req, res) => {
+  var user;
   try {
     const checkUser = await User.findOne({
       // check if user already exist
