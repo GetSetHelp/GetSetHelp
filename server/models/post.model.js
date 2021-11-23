@@ -6,34 +6,34 @@ const postSchema = new mongoose.Schema(
       type: mongoose.Types.ObjectId,
       auto: true,
       unique: true,
-      required: true,
+      // required: true,
     },
     creatorId: {
       type: mongoose.Types.ObjectId,
-      required: true,
+      // required: true,
     },
     title: {
       type: String,
-      required: true,
+      // required: true,
     },
     // TODO: Text should be sanitized markdown
     text: {
       type: String,
-      required: true,
+      // required: true,
     },
     likeCounter: {
       type: Number,
-      required: true,
+      // required: true,
       default: 0,
     },
     likers: {
       type: [mongoose.Types.ObjectId],
-      required: true,
+      // required: true,
       default: [],
     },
     category: {
       type: String,
-      required: true,
+      // required: true,
     },
     tags: {
       type: String,

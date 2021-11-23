@@ -4,20 +4,20 @@ const messageSchema = new mongoose.Schema(
   {
     senderId: {
       type: mongoose.Types.ObjectId,
-      required: true,
+      // required: true,
     },
     recieverId: {
       type: mongoose.Types.ObjectId,
-      required: true,
+      // required: true,
     },
     timeStamp: {
       type: Date,
-      required: true,
+      // required: true,
       default: Date.now,
     },
     text: {
       type: String,
-      required: true,
+      // required: true,
     },
   },
   {

@@ -1,7 +1,7 @@
 import "./App.css";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Navbar from "./Components/Navbar/Navbar.js";
-import Home from "./Components/Home/Home.js";
+import InteractiveForm from "./Components/InteractiveForm/InteractiveForm.js";
 import Login from "./Components/Login/Login.js";
 
 function App() {
@@ -12,7 +12,7 @@ function App() {
           <Navbar />
 
           <Switch>
-            <Route exact path="/" component={Home} />
+            <Route exact path="/InteractiveForm" component={InteractiveForm} />
             <Route exact path="/login" component={Login} />
           </Switch>
         </div>
