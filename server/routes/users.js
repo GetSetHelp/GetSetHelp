@@ -7,9 +7,9 @@ const UserCredential = require("../models/UserCredential.model.js");
 router.post("/login", verifyUser, async (req, res) => {
   var user;
   try {
-    user = await User.findOne({
+    user = await UserCredential.findOne({
       // check if user already exist
-      email: req.body.email,
+      userId: req.payload["sub"],
     });
   } catch (err) {
     console.log(err);
@@ -18,6 +18,7 @@ router.post("/login", verifyUser, async (req, res) => {
 
   if (user) {
     res.status(200).json("LoggedIn!");
+    return;
   }
   else {
     user = new UserCredential();
