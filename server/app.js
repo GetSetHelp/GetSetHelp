@@ -1,45 +1,36 @@
-const createError = require('http-errors');
-const express = require('express');
-const path = require('path');
-const cookieParser = require('cookie-parser');
-const logger = require('morgan');
-const mongoose = require('mongoose');
+require("dotenv").config();
 
-const indexRouter = require('./routes/index');
-const usersRouter = require('./routes/users');
-
+const createError = require("http-errors");
+const express = require("express");
+const path = require("path");
+const cookieParser = require("cookie-parser");
+const logger = require("morgan");
+const mongoose = require("mongoose");
+const verifyUser = require("./middlewares/verifyUser");
 const app = express();
+cors = require("cors");
 
 // MongoDB Connection
-mongoose.connect(process.env.MONGODB_URL, async (err)=> {
-  if (err)
-    throw err;
+mongoose.connect(process.env.MONGODB_URL, async (err) => {
+  if (err) throw err;
   console.log("Conncted to MongoDB!");
 });
 
-app.use(logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+var corsOptions = {
+  origin: "http://localhost:3000",
+  optionsSuccessStatus: 200,
+};
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use(cors(corsOptions));
+app.use(
+  express.json({
+    extended: false,
+  })
+);
+app.use(express.static(path.join(__dirname, "..", "build")));
+app.use(express.static("public"));
+app.use("/user", require("./routes/users"));
 
-// catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  next(createError(404));
-});
+const port = 4000;
 
-// error handler
-app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
-
-  // render the error page
-  res.status(err.status || 500);
-  res.render('error');
-});
-
-module.exports = app;
+app.listen(port, () => console.log("Server started on Port: 4001"));

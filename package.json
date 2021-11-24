@@ -11,6 +11,6 @@
   "scripts": {
     "dev": "concurrently --kill-others \"yarn client\" \"yarn server\"",
     "client": "cd client && yarn start",
-    "server": "cd server && yarn dev"
+    "server": "cd server && yarn start"
   }
 }
