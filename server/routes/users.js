@@ -7,24 +7,33 @@ const UserCredential = require("../models/UserCredential.model.js");
 router.post("/login", verifyUser, async (req, res) => {
   var user;
   try {
-    const checkUser = await User.findOne({
+    user = await User.findOne({
       // check if user already exist
       email: req.body.email,
     });
-    if (checkUser) {
-      res.send("User already exist!");
-    } else {
-      const newUser = new User();
-      newUser.userId = req.body.gId;
-      newUser.firstname = req.body.firstName;
-      newUser.lastname = req.body.lastName;
-      newUser.email = req.body.email;
-      let newUserModel = new User(newUser);
-      await newUserModel.save();
-      res.json("New User Successfully Added!");
+  } catch (err) {
+    console.log(err);
+    res.status(401).send("Not registered!");
+  }
+
+  if (user) {
+    res.status(200).json("LoggedIn!");
+  }
+  else {
+    user = new UserCredential();
+    user.userId = req.payload["sub"];
+    user.firstname = req.payload["given_name"];
+    user.lastname = req.payload["family_name"];
+    if (req.payload["email_verified"]) {
+      user.email = req.payload["email"];
     }
-  } catch {
-    res.status(500).send("Oops! Something went wrong.");
+    else {
+      res.status(400).json("Email is not verified!");
+      return;
+    }
+    user.save()
+      .then(() => res.status(200).json('User successfully Signed up!'))
+      .catch(err => res.status(400).json('Error: '+ err));
   }
 });
 router.post("/signUpForm", async (req, res, err) => {

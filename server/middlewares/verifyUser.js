@@ -6,9 +6,10 @@ async function verifyUser(req, res, next) {
       idToken: req.body.id_token,
       audience: process.env.CLIENT_ID,
   });
-    const payload = ticket.getPayload();
-    req.payload = payload;
-    next();
+  const payload = ticket.getPayload();
+  req.payload = payload;
+  // console.log(payload);
+  next();
 }
 
 module.exports = verifyUser;
